@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Almacén</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+        }
+        .menu {
+            margin-bottom: 20px;
+        }
+        .menu button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .section {
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Gestión de Almacén</h1>
+</header>
+
+<main>
+    <div class="menu">
+        <button onclick="mostrarSeccion('personas')">Personas</button>
+        <button onclick="mostrarSeccion('proveedores')">Proveedores</button>
+        <button onclick="mostrarSeccion('mercaderias')">Mercaderías</button>
+        <button onclick="mostrarSeccion('almacen')">Estado del Almacén</button>
+    </div>
+
+    <section id="personas" class="section">
+        <h2>Personas</h2>
+        <button onclick="mostrarFormularioPersona()">Agregar Persona</button>
+        <div id="formulario-persona" style="display:none;">
+            <h3>Nueva Persona</h3>
+            <form id="formPersona">
+                <label for="nombrePersona">Nombre:</label>
+                <input type="text" id="nombrePersona" required><br><br>
+                <label for="apellidoPersona">Apellido:</label>
+                <input type="text" id="apellidoPersona" required><br><br>
+                <label for="telefonoPersona">Teléfono:</label>
+                <input type="text" id="telefonoPersona" required><br><br>
+                <label for="emailPersona">Email:</label>
+                <input type="email" id="emailPersona" required><br><br>
+                <button type="button" onclick="agregarPersona()">Guardar Persona</button>
+            </form>
+        </div>
+        <table id="tablaPersonas">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+            </tr>
+            <!-- Aquí se agregarán las filas de personas -->
+        </table>
+    </section>
+
+    <section id="proveedores" class="section">
+        <h2>Proveedores</h2>
+        <button onclick="mostrarFormularioProveedor()">Agregar Proveedor</button>
+        <div id="formulario-proveedor" style="display:none;">
+            <h3>Nuevo Proveedor</h3>
+            <form id="formProveedor">
+                <label for="nombreProveedor">Nombre:</label>
+                <input type="text" id="nombreProveedor" required><br><br>
+                <label for="telefonoProveedor">Teléfono:</label>
+                <input type="text" id="telefonoProveedor" required><br><br>
+                <label for="emailProveedor">Email:</label>
+                <input type="email" id="emailProveedor" required><br><br>
+                <label for="localidadProveedor">Localidad:</label>
+                <input type="text" id="localidadProveedor" required><br><br>
+                <button type="button" onclick="agregarProveedor()">Guardar Proveedor</button>
+            </form>
+        </div>
+        <table id="tablaProveedores">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Localidad</th>
+            </tr>
+            <!-- Aquí se agregarán las filas de proveedores -->
+        </table>
+    </section>
+
+    <section id="mercaderias" class="section">
+        <h2>Mercaderías</h2>
+        <button onclick="mostrarFormularioMercaderia()">Agregar Mercadería</button>
+        <div id="formulario-mercaderia" style="display:none;">
+            <h3>Nueva Mercadería</h3>
+            <form id="formMercaderia">
+                <label for="nombreMercaderia">Nombre:</label>
+                <input type="text" id="nombreMercaderia" required><br><br>
+                <label for="proveedorMercaderia">Proveedor:</label>
+                <select id="proveedorMercaderia"></select><br><br>
+                <label for="detalleMercaderia">Detalle:</label>
+                <input type="text" id="detalleMercaderia" required><br><br>
+                <label for="fragmentacionMercaderia">Fragmentación:</label>
+                <input type="text" id="fragmentacionMercaderia" required><br><br>
+                <button type="button" onclick="agregarMercaderia()">Guardar Mercadería</button>
+            </form>
+        </div>
+        <table id="tablaMercaderias">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Proveedor</th>
+                <th>Detalle</th>
+                <th>Fragmentación</th>
+            </tr>
+            <!-- Aquí se agregarán las filas de mercaderías -->
+        </table>
+    </section>
+
+    <section id="almacen" class="section">
+        <h2>Estado del Almacén</h2>
+        <button onclick="mostrarFormularioEntrada()">Agregar Entrada</button>
+        <button onclick="mostrarFormularioSalida()">Registrar Salida</button>
+        <div id="formulario-entrada" style="display:none;">
+            <h3>Nueva Entrada</h3>
+            <form id="formEntrada">
+                <label for="mercaderiaEntrada">Mercadería:</label>
+                <select id="mercaderiaEntrada"></select><br><br>
+                <label for="cantidadEntrada">Cantidad:</label>
+                <input type="number" id="cantidadEntrada" required><br><br>
+                <button type="button" onclick="agregarEntrada()">Registrar Entrada</button>
+            </form>
+        </div>
+        <div id="formulario-salida" style="display:none;">
+            <h3>Nueva Salida</h3>
+            <form id="formSalida">
+                <label for="mercaderiaSalida">Mercadería:</label>
+                <select id="mercaderiaSalida"></select><br><br>
+                <label for="cantidadSalida">Cantidad:</label>
+                <input type="number" id="cantidadSalida" required><br><br>
+                <button type="button" onclick="registrarSalida()">Registrar Salida</button>
+            </form>
+        </div>
+        <table id="tablaAlmacen">
+            <tr>
+                <th>ID Mercadería</th>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Fecha de Entrada</th>
+            </tr>
+            <!-- Aquí se agregarán las filas del almacén -->
+        </table>
+    </section>
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
