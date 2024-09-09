@@ -1,0 +1,42 @@
+{
+    "personas": [],
+    "proveedores": [
+        {
+            "id_proveedor": 1,
+            "nombre": "Tony",
+            "telefono": "666234432",
+            "email": "tomy@gmail.com",
+            "localidad": "barcelona"
+        },
+        {
+            "id_proveedor": 2,
+            "nombre": "Cacho",
+            "telefono": "52343213",
+            "email": "cacho@gmial.com",
+            "localidad": "barcelona"
+        }
+    ],
+    "mercaderias": [
+        {
+            "id_mercaderia": 1,
+            "nombre": "solomillo",
+            "id_proveedor": null,
+            "detalle": "solomillo para tacos",
+            "fragmentacion": "bolsa de 2 kg"
+        },
+        {
+            "id_mercaderia": 2,
+            "nombre": "contramuslo de pollo",
+            "id_proveedor": 2,
+            "detalle": "pollo para plancha",
+            "fragmentacion": "bolsa de 2 kg"
+        }
+    ],
+    "almacenes": [
+        {
+            "id_mercaderia": 1,
+            "cantidad": 2,
+            "fecha_entrada": "2024-08-23 18:14:31"
+        }
+    ]
+}
